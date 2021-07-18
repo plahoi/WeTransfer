@@ -20,4 +20,5 @@ The way we can keep csv file updated daily - is to put the script `load_coin_csv
 2. `git init` in the working directory
 3. `git clone https://github.com/plahoi/WeTransfer.git`
 4. `make deploy` copies the schedule from crontab file in repository to your local crontab
+5. `make run`
 
