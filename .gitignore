@@ -178,7 +178,3 @@ Thumbs.db
 *.ini
 *.properties
 *.key
-elt_config.py
-fb_config.py
-analysts_config.py
-/config/cred/
