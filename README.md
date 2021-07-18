@@ -3,8 +3,8 @@ Here is an application available to fetch data from different sources to gather 
 
 It does not work as I expected, so I created several methods of deployment to support all requirements.
 
-## Web app.
-It is built with the use of framework Streamlit. Streamlit allows building DE/DS application very fast. Long story short, to run it you need to load docker image and run it.
+## Docker Web app
+It is built with the use of Streamlit framework https://streamlit.io/. Streamlit allows building DE/DS application very fast. Long story short, to run it you need to load docker image and run it.
 
 `docker pull plaha/wetransfer_anton_poliakov`</br>
 `docker run -d -p 8501:8501 plaha/wetransfer_anton_poliakov:latest`
