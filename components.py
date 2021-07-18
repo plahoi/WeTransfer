@@ -5,14 +5,14 @@ import json
 import streamlit as st
 import urllib.request
 import pandas as pd
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as eT
 
 
 @st.cache
 def prices_data(start, end):
     base_url = 'https://api.coindesk.com'
     endpoint = f'/v1/bpi/historical/close.json?start={start}&end={end}'
-    print(f'{base_url}{endpoint}')
+
     try:
         response = requests.get(url=f'{base_url}{endpoint}')
     except requests.exceptions.HTTPError:
@@ -27,9 +27,9 @@ def prices_data(start, end):
 def load_exchange_rate_data():
     url = 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/usd.xml'
     response = urllib.request.urlopen(url).read()
-    tree = ET.fromstring(response)
+    tree = eT.fromstring(response)
 
-    df = pd.DataFrame((x.attrib for x in tree[1][1]), columns=['TIME_PERIOD','OBS_VALUE'])
+    df = pd.DataFrame((x.attrib for x in tree[1][1]), columns=['TIME_PERIOD', 'OBS_VALUE'])
     df.set_index('TIME_PERIOD', inplace=True)
     return df
 
@@ -71,31 +71,22 @@ def add_transformations(df):
     return df
 
 
-# if __name__ == '__main__':
+def get_coin_data(start, end):
     # Build dates scope
-    # start, end = dates_threshold()
-    # dates = dates_scope_df(start, end)
-    # #
-    # # A exchange rates on a date
-    # exchange_rate = get_exchange_rate(dates)
-    # print(exchange_rate.head())
-    #
-    # # Add coin usd price
-    # df = add_usd_price(exchange_rate)
-    # print(df.head())
-    # print(df.head(20))
-    # df = add_transformations(df)
-#     # fill weekends
-#     df.fillna(method='ffill', inplace=True)
-#
-#     # Add eur price
-#     df['eur_price'] = df['usd_price'].astype('float') * df['exchange_rate'].astype('float')
-#
-#     df['week_rolling_avg'] = df['eur_price'].rolling(7, min_periods=7).mean()
-#     print(df)
-#
-#     file_name = 'price_index_data.csv'
-#     df.to_csv(file_name, columns=['dttm', 'usd_price', 'eur_price', 'week_rolling_avg'], index=False)
-#     df.plot(x='dttm', y='week_rolling_avg')
-#     plt.show()
-#     plt.close("all")
+    # start, end = components.dates_threshold()
+    dates = dates_scope_df(start, end)
+
+    # A exchange rates on a date
+    exchange_rate = get_exchange_rate(dates)
+
+    # Add coin usd price
+    df = add_usd_price(exchange_rate)
+
+    df = add_transformations(df)
+
+    return df
+
+
+def trim_dataframe(df, start, end):
+    df = df[start: end]
+    return df
