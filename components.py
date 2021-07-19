@@ -8,7 +8,6 @@ import pandas as pd
 import xml.etree.ElementTree as eT
 
 
-@st.cache
 def prices_data(start, end):
     base_url = 'https://api.coindesk.com'
     endpoint = f'/v1/bpi/historical/close.json?start={start}&end={end}'
