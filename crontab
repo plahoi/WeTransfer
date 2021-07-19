@@ -1,1 +1,1 @@
-0 10 * * * python3 /app/load_coin_csv.py 2>&1
+* * * * * /usr/local/bin/python3 /app/load_coin_csv.py >> /tmp/load_coin_csv.log 2>&1

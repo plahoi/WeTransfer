@@ -21,4 +21,4 @@ RUN /usr/bin/crontab /etc/cron.d/crontab
 
 #CMD ["cron", "-f"]
 
-CMD streamlit run index.py
+CMD streamlit run index.py & cron -f
