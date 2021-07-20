@@ -21,9 +21,8 @@ URL: http://localhost:8501/ will allow you to get the data from all sources and 
 ## Standalone crontab script
 The way we can keep csv file updated daily - is to put the script `load_coin_csv.py` into crontab by hand on a remote host (EC2 on aws for example). To do so - you should do the following steps:
 1. Head to your working host
-2. `git init` in the working directory
-3. `git clone https://github.com/plahoi/WeTransfer.git`
-4. `make deploy` copies the schedule from crontab file in repository to your local crontab
+2. `git clone https://github.com/plahoi/WeTransfer.git`
+3. `make deploy` copies the schedule from crontab file in repository to your local crontab
 
 Additionally `make run` Starts streamlit webapp on http://localhost:8501/ address
 
